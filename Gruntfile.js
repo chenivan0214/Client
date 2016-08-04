@@ -1,9 +1,9 @@
-'use strict'; 
+'use strict';
 
 module.exports = function(grunt) {
     var loclhostPort = 8000,
         listenerPort = 35729;
-    
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         connect: {
@@ -41,12 +41,12 @@ module.exports = function(grunt) {
             options: {}
         }
     });
-    
+
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    
+
     grunt.registerTask('default', ['uglify', 'jshint']);
     grunt.registerTask('live', ['connect', 'watch']);
 };
