@@ -33,7 +33,7 @@ module.exports = function(grunt) {
             options: {},
             build: {
                 src: 'src/js/*.js',
-                dest: 'build/js/test.min.js'
+                dest: 'build/js/min.js'
             }
         },
         jshint: {
