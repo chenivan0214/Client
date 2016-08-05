@@ -1,0 +1,9 @@
+ng-app
+ng-model
+ng-controller
+angular.module()
+$rootScope
+ng-click
+表達式
+
+第七章
