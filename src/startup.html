@@ -16,6 +16,17 @@
         <input type="text" ng-model="number" style="text-align: right;"/>
         <br/>
         {{preview}}
+        <br/>
+        <div>{{myNumber | number: 0}}</div>
+        <div>{{myCurrency | currency}}</div>
+        <div>{{myDate | date:'medium'}}</div>
+        <div>{{ {'name': 'Ari', 'City': 'SanFrancisco'} | json }}</div>
+        <br/>
+        <form name="myForm">
+            <input type="text" name="myInputNumber"
+                ng-model="myInputNumber" ng-minlength="5" ng-maxlength="10" required/>
+            <span ng-bind="myFormError"></span>
+        </form>
     </div>
 <div>
 

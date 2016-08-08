@@ -15,4 +15,12 @@ angular.module('StartupApp', [])
         fnCommon("old:" + oldVal);
         fnCommon("scope:" + scope);
     });
+
+    $scope.myNumber = 12345.33333;
+    $scope.myCurrency = 123456677;
+    $scope.myDate = new Date();
+
+    $scope.$watch('myInputNumber', function(newVal) {
+        console.log(newVal);
+    });
 });
