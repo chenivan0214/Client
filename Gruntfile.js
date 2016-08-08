@@ -14,7 +14,7 @@ module.exports = function(grunt) {
             },
             server: {
                 options: {
-                    base: 'src/'
+                    base: 'dist/'
                 }
             }
         },
@@ -26,27 +26,48 @@ module.exports = function(grunt) {
                 options: {
                     livereload: true
                 },
-                files: ['src/*.html', 'src/css/**/*', 'src/js/**/*.js']
+                files: ['dist/*.html', 'dist/css/*', 'dist/js/*.js']
+            },
+            sass: {
+                options: {},
+                files: ['src/css/**/*'],
+                tasks: ['sass']
+            },
+            script: {
+                options: {},
+                files: ['src/js/**/*'],
+                tasks: ['uglify']
+            }
+        },
+        sass: {
+            dist: {
+                options: {
+                    sourcemap: 'file'
+                },
+                files: {
+                    'dist/css/style.css': 'src/css/style.scss'
+                }
             }
         },
         uglify: {
             options: {},
             build: {
                 src: 'src/js/*.js',
-                dest: 'build/js/min.js'
+                dest: 'dist/js/common.min.js'
             }
         },
         jshint: {
-            build: [ 'Gruntfile.js', 'src/js/*.js' ],
-            options: {}
+            options: {},
+            build: [ 'Gruntfile.js', 'src/js/**/*' ]
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['uglify', 'jshint']);
+    grunt.registerTask('default', ['sass', 'uglify', 'jshint']);
     grunt.registerTask('live', ['connect', 'watch']);
 };

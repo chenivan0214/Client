@@ -1,4 +1,3 @@
-var str = "str";
 var fnCommon = function(str) {
         console.log(str);
     };
