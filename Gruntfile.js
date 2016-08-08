@@ -42,7 +42,7 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 options: {
-                    sourcemap: 'file'
+                    sourcemap: 'none'
                 },
                 files: {
                     'dist/css/style.css': 'src/css/style.scss'
