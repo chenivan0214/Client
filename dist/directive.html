@@ -52,6 +52,20 @@
         <br/>
         <span ng-bind="name"></span>
     </div>
+    <br/>
+    <form name="myForm" ng-submit="fnSubmitMyForm()">
+        <input type="text" name="dynamic_input" ng-model="myField.name"/>
+        <br/>
+        <button type="submit">Submit</button>
+    </form>
+    <br/>
+    <select ng-model="city" ng-options="city.name for city in cities">
+        <option value="">Choose City</option>
+    </select>
+    <br/>
+    {{city.name}}
+    <br/>
+    <button ng-attr-myid="{{myid}}" ng-click="fnWatchSelf()">self</button>
 <div>
 
 </body>

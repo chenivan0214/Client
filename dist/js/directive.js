@@ -21,6 +21,23 @@ angular.module('DirectiveApp', [])
         { name : "A" },
         { name : "B" }
     ];
+
+    $scope.fnSubmitMyForm = function() {
+        console.log($scope.myField.name);
+        console.log("fnSubmitMyForm");
+    };
+
+    $scope.cities = [
+        {name: "A1"},
+        {name: "A2"},
+        {name: "A3"},
+    ];
+
+    $scope.myid = "myid";
+
+    $scope.fnWatchSelf = function() {
+        console.log($scope.myid);
+    };
 })
 .directive('directive', function() {
     return {
