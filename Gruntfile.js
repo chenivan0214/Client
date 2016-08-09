@@ -26,7 +26,12 @@ module.exports = function(grunt) {
                 options: {
                     livereload: true
                 },
-                files: ['dist/*.html', 'dist/css/*', 'dist/js/*.js']
+                files: ['dist/*.html', 'dist/css/*', 'dist/js/**/*']
+            },
+            html: {
+                options: {},
+                files: ['src/*.html'],
+                tasks: ['htmlmin']
             },
             sass: {
                 options: {},
@@ -35,8 +40,24 @@ module.exports = function(grunt) {
             },
             script: {
                 options: {},
-                files: ['src/js/**/*'],
-                tasks: ['uglify']
+                files: ['src/js/*'],
+                tasks: ['jshint', 'uglify']
+            },
+            angular: {
+                options: {},
+                files: ['src/js/angular/**/*'],
+                tasks: ['ngAnnotate']
+            }
+        },
+        htmlmin: {
+            dist: {
+                options: {
+                    collapseWhitespace: true
+                },
+                files: {
+                    'dist/startup.html': 'src/startup.html',
+                    'dist/directive.html': 'src/directive.html'
+                }
             }
         },
         sass: {
@@ -56,18 +77,33 @@ module.exports = function(grunt) {
                 dest: 'dist/js/common.min.js'
             }
         },
+        ngAnnotate: {
+            options: {
+                singleQuotes: true
+            },
+            app: {
+                files: {
+                    'dist/js/startup.js': ['src/js/angular/startup.js'],
+                    'dist/js/directive.js': ['src/js/angular/directive.js']
+                }
+            }
+        },
         jshint: {
-            options: {},
-            build: [ 'Gruntfile.js', 'src/js/**/*' ]
+            options: {
+                node: true
+            },
+            build: [ 'src/js/**/*']
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-ng-annotate');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['sass', 'uglify', 'jshint']);
+    grunt.registerTask('default', ['htmlmin', 'sass', 'uglify', 'ngAnnotate', 'jshint']);
     grunt.registerTask('live', ['connect', 'watch']);
 };

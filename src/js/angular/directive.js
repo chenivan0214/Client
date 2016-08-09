@@ -1,9 +1,9 @@
 var isDisabled = false;
 
 angular.module('DirectiveApp', [])
-.run(['$rootScope', '$timeout', function($rootScope, $timeout) {
-}])
-.controller('MyController', ['$scope', '$timeout', function($scope, $timeout) {
+.run(function($rootScope, $timeout) {
+})
+.controller('MyController', function($scope, $timeout) {
     $scope.url = "http://google.com";
 
     $scope.fnChangeStatus = function() {
@@ -38,7 +38,7 @@ angular.module('DirectiveApp', [])
     $scope.fnWatchSelf = function() {
         console.log($scope.myid);
     };
-}])
+})
 .directive('directive', function() {
     return {
         restrict: 'A',

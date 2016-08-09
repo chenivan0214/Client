@@ -5,7 +5,7 @@ var fnCommon = function(str) {
     };
 
 angular.module('StartupApp', [])
-.controller('MyController', ['$scope', function($scope) {
+.controller('MyController', function($scope) {
     $scope.number = "0";
     $scope.change = function() {
         $scope.number = Math.round(Math.random() * 10000000);
@@ -24,4 +24,4 @@ angular.module('StartupApp', [])
     $scope.$watch('myInputNumber', function(newVal) {
         console.log(newVal);
     });
-}]);
+});
