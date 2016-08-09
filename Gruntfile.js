@@ -55,8 +55,7 @@ module.exports = function(grunt) {
                     collapseWhitespace: true
                 },
                 files: {
-                    'dist/startup.html': 'src/startup.html',
-                    'dist/directive.html': 'src/directive.html'
+                    'dist/test.html': 'src/test.html'
                 }
             }
         },
@@ -83,8 +82,7 @@ module.exports = function(grunt) {
             },
             app: {
                 files: {
-                    'src/js/angular_min/startup.js': ['src/js/angular/startup.js'],
-                    'src/js/angular_min/directive.js': ['src/js/angular/directive.js']
+                    'src/js/angular_min/test.js': ['src/js/angular/test.js']
                 }
             }
         },
@@ -97,8 +95,7 @@ module.exports = function(grunt) {
         concat: {
            angular: {
                src: [
-                   'src/js/angular_min/startup.js',
-                   'src/js/angular_min/directive.js'
+                   'src/js/angular_min/test.js',
                ],
                dest: 'dist/js/angular_app.js'
            }
