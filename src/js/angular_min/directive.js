@@ -1,3 +1,5 @@
+"use strict";
+
 var isDisabled = false;
 
 angular.module('DirectiveApp', [])

@@ -46,7 +46,7 @@ module.exports = function(grunt) {
             angular: {
                 options: {},
                 files: ['src/js/angular/**/*'],
-                tasks: ['ngAnnotate']
+                tasks: ['ngAnnotate', 'concat']
             }
         },
         htmlmin: {
@@ -83,8 +83,8 @@ module.exports = function(grunt) {
             },
             app: {
                 files: {
-                    'dist/js/startup.js': ['src/js/angular/startup.js'],
-                    'dist/js/directive.js': ['src/js/angular/directive.js']
+                    'src/js/angular_min/startup.js': ['src/js/angular/startup.js'],
+                    'src/js/angular_min/directive.js': ['src/js/angular/directive.js']
                 }
             }
         },
@@ -93,6 +93,15 @@ module.exports = function(grunt) {
                 node: true
             },
             build: [ 'src/js/**/*']
+        },
+        concat: {
+           angular: {
+               src: [
+                   'src/js/angular_min/startup.js',
+                   'src/js/angular_min/directive.js'
+               ],
+               dest: 'dist/js/angular_app.js'
+           }
         }
     });
 
@@ -103,7 +112,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-ng-annotate');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
-    grunt.registerTask('default', ['htmlmin', 'sass', 'uglify', 'ngAnnotate', 'jshint']);
+    grunt.registerTask('default', [
+        'htmlmin',
+        'sass',
+        'uglify',
+        'ngAnnotate',
+        'jshint',
+        'concat'
+    ]);
     grunt.registerTask('live', ['connect', 'watch']);
 };
