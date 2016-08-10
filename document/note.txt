@@ -1,1 +1,5 @@
-118
+參考
+1.https://www.gitbook.com/book/checkcheckzz/angularjs-learning-notes/details
+
+進度
+p139
