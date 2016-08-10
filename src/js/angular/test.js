@@ -2,28 +2,53 @@
 
 angular.module('TestApp', [])
 .run(['$rootScope', '$timeout', function($rootScope, $timeout) {
-    /* global */
 }])
-.controller('FormController', ['$scope', function($scope) {
-    /* local */
-    //scope define
-    $scope.accountText = "Account:";
-    $scope.accountValue = "";
+.controller('FormController', [
+    '$scope', 'initData',
+    function($scope, initData) 
+{
+    //define
+    $scope.accountText = initData.account.text;
+    $scope.accountValue = initData.account.value;
 
-    $scope.passwordText = "Password:";
-    $scope.passwordValue = "";
+    $scope.passwordText = initData.password.text;
+    $scope.passwordValue = initData.password.value;
 
-    $scope.favoriteText = "Favorite:";
-    $scope.aryFavoriteObj = [
-        {text: "phone", value: "phone"},
-        {text: "compute", value: "compute"}
-    ];
+    $scope.favoriteText = initData.favorite.text;
+    $scope.aryFavoriteObj = initData.favorite.data;
 
-    $scope.sexText = "Sex:";
-    $scope.arySexObj = [
-        {text: "M", value: "1"},
-        {text: "F", value: "2"}
-    ];
+    $scope.sexText = initData.sex.text;
+    $scope.arySexObj = initData.sex.data;
 
     console.log($scope);
 }]);
+
+angular.module('TestApp')
+.factory('initData', function() {
+    var objInitData = {
+        account: {
+            text: "Account:",
+            value: ""
+        },
+        password: {
+            text: "Password:",
+            value: ""
+        },
+        favorite: {
+            text: "Favorite:",
+            data: [
+                {text: "phone", value: "phone"},
+                {text: "compute", value: "compute"}
+            ]
+        },
+        sex: {
+            text: "Sex:",
+            data: [
+                {text: "M", value: "1"},
+                {text: "F", value: "2"}
+            ]
+        }
+    };
+
+    return objInitData;
+});

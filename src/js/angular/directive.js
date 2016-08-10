@@ -51,4 +51,13 @@ angular.module('DirectiveApp', [])
         },
         template: '<a href="{{url}}">{{linkText}}</a>'
     };
+})
+.directive('testDirective', function() {
+    return {
+        restrict: 'A',
+        scope: {
+            url: '=url'
+        },
+        template: '<div>{{url}}</div>'
+    };
 });
