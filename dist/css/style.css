@@ -1,3 +1,20 @@
+.break {
+  clear: both; }
+
+.show {
+  display: block; }
+
+.hide {
+  display: none; }
+
+.m10 {
+  height: 10px;
+  clear: both; }
+
+.m20 {
+  height: 20px;
+  clear: both; }
+
 .inp1 {
   width: 200px;
   border: 1px solid #c0c0c0; }

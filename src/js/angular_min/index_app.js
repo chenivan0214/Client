@@ -1,11 +1,11 @@
 "use strict";
 
-angular.module('TestApp', [])
+angular.module('IndexApp', [])
 .run(['$rootScope', '$timeout', function($rootScope, $timeout) {
 }])
-.controller('FormController', [
+.controller('MainController', [
     '$scope', 'initData',
-    function($scope, initData) 
+    function($scope, initData)
 {
     //define
     $scope.accountText = initData.account.text;
@@ -20,10 +20,16 @@ angular.module('TestApp', [])
     $scope.sexText = initData.sex.text;
     $scope.arySexObj = initData.sex.data;
 
-    console.log($scope);
+    $scope.operateStatus = initData.showStatus.operate;
+
+    $scope.fnShowOperate = function() {
+         $scope.operateStatus = ! $scope.operateStatus;
+    }
+}])
+.controller('OperateController', ['$scope', function($scope) {
 }]);
 
-angular.module('TestApp')
+angular.module('IndexApp')
 .factory('initData', function() {
     var objInitData = {
         account: {
@@ -47,6 +53,9 @@ angular.module('TestApp')
                 {text: "M", value: "1"},
                 {text: "F", value: "2"}
             ]
+        },
+        showStatus: {
+            operate: false
         }
     };
 

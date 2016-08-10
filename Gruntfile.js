@@ -26,11 +26,11 @@ module.exports = function(grunt) {
                 options: {
                     livereload: true
                 },
-                files: ['dist/*.html', 'dist/css/*', 'dist/js/**/*']
+                files: ['dist/*.html', 'dist/view/*.html', 'dist/css/*', 'dist/js/**/*']
             },
             html: {
                 options: {},
-                files: ['src/*.html'],
+                files: ['src/html/*.html', 'src/html/view/*.html'],
                 tasks: ['htmlmin']
             },
             sass: {
@@ -55,8 +55,8 @@ module.exports = function(grunt) {
                     collapseWhitespace: true
                 },
                 files: {
-                    'dist/directive.html': 'src/directive.html',
-                    'dist/test.html': 'src/test.html'
+                    'dist/index.html': 'src/html/index.html',
+                    'dist/view/_operate.html': 'src/html/view/_operate.html'
                 }
             }
         },
@@ -83,8 +83,7 @@ module.exports = function(grunt) {
             },
             app: {
                 files: {
-                    'src/js/angular_min/directive.js': ['src/js/angular/directive.js'],
-                    'src/js/angular_min/test.js': ['src/js/angular/test.js']
+                    'src/js/angular_min/index_app.js': ['src/js/angular/index_app.js']
                 }
             }
         },
@@ -97,8 +96,7 @@ module.exports = function(grunt) {
         concat: {
            angular: {
                src: [
-                   'src/js/angular_min/directive.js',
-                   'src/js/angular_min/test.js'
+                   'src/js/angular_min/index_app.js'
                ],
                dest: 'dist/js/angular_app.js'
            }
