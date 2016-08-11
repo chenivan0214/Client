@@ -1,6 +1,15 @@
 "use strict";
 
 angular.module('IndexApp', [])
+.config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+    .when('/test', {
+        templateUrl: 'test.html'
+    })
+    .otherwise({
+        redirectTo: '/'
+    });
+}])
 .run(['$rootScope', '$timeout', function($rootScope, $timeout) {
 }])
 .controller('MainController', ['$scope', function($scope) {

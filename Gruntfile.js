@@ -31,8 +31,8 @@ module.exports = function(grunt) {
             },
             html: {
                 options: {},
-                files: ['src/html/*.html'],
-                tasks: ['htmlmin']
+                files: ['src/html/**/*'],
+                tasks: ['copy']
             },
             sass: {
                 options: {},
@@ -50,14 +50,12 @@ module.exports = function(grunt) {
                 tasks: ['ngAnnotate', 'concat']
             }
         },
-        htmlmin: {
-            dist: {
-                options: {
-                    collapseWhitespace: true
-                },
-                files: {
-                    'dist/index.html': 'src/html/index.html'
-                }
+        copy: {
+            main: {
+                files: [
+                    { expand: true, cwd: 'src/html/', src: '*', dest: 'dist/', filter: 'isFile'},
+                    { expand: true, cwd: 'src/html/view/', src: '*', dest: 'dist/view', filter: 'isFile'}
+                ]
             }
         },
         sass: {
@@ -104,7 +102,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', [
-        'htmlmin',
+        'copy',
         'sass',
         'uglify',
         'ngAnnotate',
