@@ -43,8 +43,11 @@
                 <tr>
                     <td><span ng-bind="sexText"></span><td>
                     <td align="left">
-                         <select name="sex">
-                             <option ng-repeat="sexObj in arySexObj" value="{{sexObj.value}}">{{sexObj.text}}</option>
+                         <select name="sex"
+                             ng-model="sex"
+                             ng-options="sexObj.text for sexObj in arySexObj"
+                             ng-change="fnChangeSex()">
+                             <option value="">Choose</option>
                          </select>
                      <td>
                 </tr>
@@ -52,10 +55,9 @@
                     <td><span ng-bind="favoriteText"></span><td>
                     <td align="left">
                         <div ng-repeat="favoriteObj in aryFavoriteObj" ng-class-odd="'red_bk'" ng-class-even="'gray_bk'">
-                            <input type="checkbox" name="favorite"
-                                ng-model="favorite.value"
+                            <input type="checkbox" name="favorite[]" value="{{favoriteObj.value}}"
                                 ng-required="true"
-                                ng-click="fnClickFavorite()"
+                                ng-click="fnClickFavorite($event, $index, favoriteObj.value)"
                             />
                             {{$index+1}}-{{favoriteObj.text}}
                         </div>

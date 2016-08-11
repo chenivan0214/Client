@@ -15,6 +15,7 @@ angular.module('IndexApp', [])
 
     $scope.favoriteText = initData.favorite.text;
     $scope.aryFavoriteObj = initData.favorite.data;
+    $scope.aryCheckedFavorite = [];
 
     $scope.sexText = initData.sex.text;
     $scope.arySexObj = initData.sex.data;
@@ -27,8 +28,7 @@ angular.module('IndexApp', [])
     });
 
     /* event */
-
-    //Click
+    //click
     $scope.fnShowOperate = function($event) {
         console.log($event);
         $scope.operateStatus = ! $scope.operateStatus;
@@ -42,8 +42,16 @@ angular.module('IndexApp', [])
         console.log($scope.passwordValue);
     };
 
-    $scope.fnClickFavorite = function() {
-        console.log($scope);
+    $scope.fnChangeSex = function() {
+        console.log($scope.sex.value + "/" + $scope.sex.text);
+    };
+
+    $scope.fnClickFavorite = function($event, $index, value) {
+        var target = $event.target;
+
+        if (target.checked) {
+            console.log($index + "/" + value);
+        }
     };
 
     $scope.fnSubmit = function($event) {

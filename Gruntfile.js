@@ -1,16 +1,15 @@
 'use strict';
 
 module.exports = function(grunt) {
-    var loclhostPort = 8000,
-        listenerPort = 35729;
+    var config =  grunt.file.readYAML('config.yaml');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         connect: {
             options: {
-                port: loclhostPort,
-                hostname: 'localhost',
-                livereload: listenerPort
+                hostname: config.server.host,
+                port: config.server.localhostPort,
+                livereload: config.server.listenerPort
             },
             server: {
                 options: {
@@ -20,7 +19,7 @@ module.exports = function(grunt) {
         },
         watch: {
             options: {
-                livereload: listenerPort
+                livereload: config.server.listenerPort
             },
             client: {
                 options: {

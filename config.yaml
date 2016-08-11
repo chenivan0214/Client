@@ -1,0 +1,4 @@
+server:
+    host: localhost
+    localhostPort: 8000
+    listenerPort: 35729
