@@ -1,17 +1,18 @@
 "use strict";
 
-angular.module('IndexApp', [])
+angular.module('IndexApp', ['ngRoute'])
 .config(['$routeProvider', function($routeProvider) {
     $routeProvider
-    .when('/test', {
-        templateUrl: 'test.html'
-    })
-    .otherwise({
-        redirectTo: '/'
+    .when('/success', {
+        templateUrl: 'view/success.html',
+        controller: 'SuccessController'
     });
 }])
 .run(['$rootScope', '$timeout', function($rootScope, $timeout) {
-}])
+}]);
+
+//Main Controller Zone
+angular.module('IndexApp')
 .controller('MainController', ['$scope', function($scope) {
 }])
 .controller('IndexFormController', ['$scope', 'initData', function($scope, initData) {
@@ -71,6 +72,12 @@ angular.module('IndexApp', [])
 .controller('OperateController', ['$scope', function($scope) {
 }]);
 
+//Routing Controller Zone
+angular.module('IndexApp')
+.controller('SuccessController', ['$scope', function($scope) {
+}]);
+
+//Init Data
 angular.module('IndexApp')
 .factory('initData', function() {
     var objInitData = {

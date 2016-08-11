@@ -15,6 +15,9 @@
         <form name="indexForm" ng-controller="IndexFormController">
             <table>
                 <tr>
+                    <td colspan="2" ng-view></td>
+                </tr>
+                <tr>
                     <td><span ng-bind="accountText"></span><td>
                     <td align="left">
                         <input type="text" name="account" class="inp1"

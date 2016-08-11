@@ -15,6 +15,9 @@
   height: 20px;
   clear: both; }
 
+.red {
+  color: #ff0000; }
+
 .red_bk {
   background: #ff0000; }
 
