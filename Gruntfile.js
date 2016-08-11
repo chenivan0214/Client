@@ -30,7 +30,7 @@ module.exports = function(grunt) {
             },
             html: {
                 options: {},
-                files: ['src/html/*.html', 'src/html/view/*.html'],
+                files: ['src/html/*.html'],
                 tasks: ['htmlmin']
             },
             sass: {
@@ -55,8 +55,7 @@ module.exports = function(grunt) {
                     collapseWhitespace: true
                 },
                 files: {
-                    'dist/index.html': 'src/html/index.html',
-                    'dist/view/_operate.html': 'src/html/view/_operate.html'
+                    'dist/index.html': 'src/html/index.html'
                 }
             }
         },

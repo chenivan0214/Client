@@ -3,11 +3,10 @@
 angular.module('IndexApp', [])
 .run(['$rootScope', '$timeout', function($rootScope, $timeout) {
 }])
-.controller('MainController', [
-    '$scope', 'initData',
-    function($scope, initData)
-{
-    //define
+.controller('MainController', ['$scope', function($scope) {
+}])
+.controller('IndexFormController', ['$scope', 'initData', function($scope, initData) {
+    /* define */
     $scope.accountText = initData.account.text;
     $scope.accountValue = initData.account.value;
 
@@ -22,9 +21,35 @@ angular.module('IndexApp', [])
 
     $scope.operateStatus = initData.showStatus.operate;
 
-    $scope.fnShowOperate = function() {
-         $scope.operateStatus = ! $scope.operateStatus;
-    }
+    //watchg
+    $scope.$watch('operateStatus', function(newVar, oldVar) {
+         console.log(newVar + "/" + oldVar);
+    });
+
+    /* event */
+
+    //Click
+    $scope.fnShowOperate = function($event) {
+        console.log($event);
+        $scope.operateStatus = ! $scope.operateStatus;
+    };
+
+    $scope.fnChangeAccount = function() {
+        console.log($scope.accountValue);
+    };
+
+    $scope.fnChangePassword = function() {
+        console.log($scope.passwordValue);
+    };
+
+    $scope.fnClickFavorite = function() {
+        console.log($scope);
+    };
+
+    $scope.fnSubmit = function($event) {
+        console.log($event);
+        console.log($scope.indexForm.$error);
+    };
 }])
 .controller('OperateController', ['$scope', function($scope) {
 }]);
@@ -43,8 +68,10 @@ angular.module('IndexApp')
         favorite: {
             text: "Favorite:",
             data: [
-                {text: "phone", value: "phone"},
-                {text: "compute", value: "compute"}
+                {text: "Phone", value: "phone"},
+                {text: "Compute", value: "compute"},
+                {text: "TV", value: "tv"},
+                {text: "Car", value: "car"},
             ]
         },
         sex: {

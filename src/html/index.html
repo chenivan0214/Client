@@ -12,23 +12,32 @@
 
 <div>
     <div ng-controller="MainController">
-        <form>
+        <form name="indexForm" ng-controller="IndexFormController">
             <table>
                 <tr>
                     <td><span ng-bind="accountText"></span><td>
-                    <td align="left"><input type="text" name="account" class="inp1" ng-model="accountValue"><td>
+                    <td align="left">
+                        <input type="text" name="account" class="inp1"
+                            ng-model="accountValue"
+                            ng-minlength="5"
+                            ng-maxlength="10"
+                            ng-pattern="/^.[A-Za-z0-9]+$/"
+                            ng-required="true"
+                            ng-change="fnChangeAccount()"
+                        />
+                    <td>
                 </tr>
                 <tr>
                     <td><span ng-bind="passwordText"></span><td>
-                    <td align="left"><input type="password" name="password" class="inp1" ng-model="passwordValue"><td>
-                </tr>
-                <tr>
-                    <td><span ng-bind="favoriteText"></span><td>
                     <td align="left">
-                        <div ng-repeat="favoriteObj in aryFavoriteObj">
-                            <input type="checkbox" ng-model="favorite.value"/>
-                           {{favoriteObj.text}}
-                        </div>
+                        <input type="password" name="password" class="inp1"
+                            ng-model="passwordValue"
+                            ng-minlength="5"
+                            ng-maxlength="10"
+                            ng-pattern="/^.[A-Za-z0-9]+$/"
+                            ng-required="true"
+                            ng-change="fnChangePassword()"
+                        />
                     <td>
                 </tr>
                 <tr>
@@ -40,21 +49,40 @@
                      <td>
                 </tr>
                 <tr>
+                    <td><span ng-bind="favoriteText"></span><td>
+                    <td align="left">
+                        <div ng-repeat="favoriteObj in aryFavoriteObj" ng-class-odd="'red_bk'" ng-class-even="'gray_bk'">
+                            <input type="checkbox" name="favorite"
+                                ng-model="favorite.value"
+                                ng-required="true"
+                                ng-click="fnClickFavorite()"
+                            />
+                            {{$index+1}}-{{favoriteObj.text}}
+                        </div>
+                    <td>
+                </tr>
+                <tr>
                     <td colspan="2" class="m10"><td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button ng-click="fnShowOperate()">Show Operate</button>
+                        <button ng-click="fnShowOperate($event)">Show Operate</button>
+                    <td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button ng-click="fnSubmit($event)">Submit</button>
                     <td>
                 </tr>
             </table>
+
+            <div class="break"></div>
+
+            <div ng-class="{true: 'show', false: 'hide'}[operateStatus]">
+                <!-- 內置tpl -->
+                <div ng-include="'operateTpl'"></div>
+            </div>
         </form>
-
-        <div class="break"></div>
-
-        <div ng-class="{true: 'show', false: 'hide'}[operateStatus]">
-            <div ng-include="'./view/_operate.html'"></div>
-        </div>
     </div>
 <div>
 
@@ -63,3 +91,15 @@
 
 <script src="./js/common.min.js"></script>
 <script src="./js/angular_app.js"></script>
+
+<script type="text/ng-template" id="operateTpl">
+<div ng-controller="OperateController">
+    <div class="m20"></div>
+    <table>
+        <tr>
+            <td>dd</td>
+            <td></td>
+        </tr>
+    </table>
+<div>
+</script>
