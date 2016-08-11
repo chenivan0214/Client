@@ -3,9 +3,10 @@
 angular.module('IndexApp', ['ngRoute'])
 .config(['$routeProvider', function($routeProvider) {
     $routeProvider
-    .when('/success', {
+    .when('/success/:account', {
         templateUrl: 'view/success.html',
-        controller: 'SuccessController'
+        controller: 'SuccessController',
+        controllerAs: 'app'
     });
 }])
 .run(['$rootScope', '$timeout', function($rootScope, $timeout) {
@@ -74,7 +75,8 @@ angular.module('IndexApp')
 
 //Routing Controller Zone
 angular.module('IndexApp')
-.controller('SuccessController', ['$scope', function($scope) {
+.controller('SuccessController', ['$scope', '$routeParams', function($scope, $routeParams) {
+    this.account = $routeParams.account
 }]);
 
 //Init Data

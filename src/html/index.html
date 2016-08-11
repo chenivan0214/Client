@@ -15,10 +15,12 @@
         <form name="indexForm" ng-controller="IndexFormController">
             <table>
                 <tr>
-                    <td colspan="2" ng-view></td>
+                    <td colspan="2">
+                        <div ng-view></div>
+                    </td>
                 </tr>
                 <tr>
-                    <td><span ng-bind="accountText"></span><td>
+                    <td><span ng-bind="accountText"></span></td>
                     <td align="left">
                         <input type="text" name="account" class="inp1"
                             ng-model="accountValue"
@@ -28,10 +30,10 @@
                             ng-required="true"
                             ng-change="fnChangeAccount()"
                         />
-                    <td>
+                    </td>
                 </tr>
                 <tr>
-                    <td><span ng-bind="passwordText"></span><td>
+                    <td><span ng-bind="passwordText"></span></td>
                     <td align="left">
                         <input type="password" name="password" class="inp1"
                             ng-model="passwordValue"
@@ -41,10 +43,10 @@
                             ng-required="true"
                             ng-change="fnChangePassword()"
                         />
-                    <td>
+                    </td>
                 </tr>
                 <tr>
-                    <td><span ng-bind="sexText"></span><td>
+                    <td><span ng-bind="sexText"></span></td>
                     <td align="left">
                          <select name="sex"
                              ng-model="sex"
@@ -52,10 +54,10 @@
                              ng-change="fnChangeSex()">
                              <option value="">Choose</option>
                          </select>
-                     <td>
+                     </td>
                 </tr>
                 <tr>
-                    <td><span ng-bind="favoriteText"></span><td>
+                    <td><span ng-bind="favoriteText"></span></td>
                     <td align="left">
                         <div ng-repeat="favoriteObj in aryFavoriteObj" ng-class-odd="'red_bk'" ng-class-even="'gray_bk'">
                             <input type="checkbox" name="favorite[]" value="{{favoriteObj.value}}"
@@ -64,20 +66,20 @@
                             />
                             {{$index+1}}-{{favoriteObj.text}}
                         </div>
-                    <td>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="m10"><td>
+                    <td colspan="2" class="m10"></td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <button ng-click="fnShowOperate($event)">Show Operate</button>
-                    <td>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">
                         <button ng-click="fnSubmit($event)">Submit</button>
-                    <td>
+                    </td>
                 </tr>
             </table>
 
