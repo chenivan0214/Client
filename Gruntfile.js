@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = function(grunt) {
+    require('load-grunt-tasks')(grunt);
+
     var config =  grunt.file.readYAML('config.yaml');
 
     grunt.initConfig({
@@ -101,15 +103,6 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-htmlmin');
-    grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-ng-annotate');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-
     grunt.registerTask('default', [
         'htmlmin',
         'sass',
@@ -118,5 +111,5 @@ module.exports = function(grunt) {
         'jshint',
         'concat'
     ]);
-    grunt.registerTask('live', ['connect', 'watch']);
+    grunt.registerTask('server', ['connect', 'watch']);
 };
