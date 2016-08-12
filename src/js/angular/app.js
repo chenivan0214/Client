@@ -1,6 +1,8 @@
 "use strict";
 
-angular.module('IndexApp', ['ngRoute'])
+var app = angular.module('AppNG', ['ngRoute']);
+
+app
 .config(['$routeProvider', function($routeProvider) {
     $routeProvider
     .when('/success/:account', {
@@ -13,10 +15,16 @@ angular.module('IndexApp', ['ngRoute'])
 }]);
 
 //Main Controller Zone
-angular.module('IndexApp')
+app
 .controller('MainController', ['$scope', function($scope) {
 }])
-.controller('IndexFormController', ['$scope', 'initData', function($scope, initData) {
+.controller('IndexFormController', [
+    '$scope',
+    'initData',
+    'ajaxService',
+    function($scope, initData, ajaxService)
+{
+    ajaxService({a:1});
     /* define */
     $scope.accountText = initData.account.text;
     $scope.accountValue = initData.account.value;
@@ -74,13 +82,13 @@ angular.module('IndexApp')
 }]);
 
 //Routing Controller Zone
-angular.module('IndexApp')
+app
 .controller('SuccessController', ['$scope', '$routeParams', function($scope, $routeParams) {
     this.account = $routeParams.account;
 }]);
 
 //Init Data
-angular.module('IndexApp')
+app
 .factory('initData', function() {
     var objInitData = {
         account: {

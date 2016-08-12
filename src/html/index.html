@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html ng-app="IndexApp">
+<html ng-app="AppNG">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Startup App</title>
@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<div>  
+<div>
     <div ng-controller="MainController">
         <form name="indexForm" ng-controller="IndexFormController">
             <table>
@@ -97,6 +97,7 @@
 </html>
 
 <script src="./js/app.js"></script>
+<script src="./js/app.utility.js"></script>
 
 <script type="text/ng-template" id="operateTpl">
 <div ng-controller="OperateController">
