@@ -1,30 +1,26 @@
 "use strict";
 
-var app = angular.module('AppNG', ['ngRoute']);
+var App = angular.module('App', ['ngRoute', 'UtilityApp']);
 
-app
+App
 .config(['$routeProvider', function($routeProvider) {
     $routeProvider
     .when('/success/:account', {
         templateUrl: 'view/success.html',
         controller: 'SuccessController',
-        controllerAs: 'app'
+        controllerAs: 'successApp'
     });
 }])
 .run(['$rootScope', '$timeout', function($rootScope, $timeout) {
 }]);
 
 //Main Controller Zone
-app
+App
 .controller('MainController', ['$scope', function($scope) {
 }])
 .controller('IndexFormController', [
-    '$scope',
-    'initData',
-    'ajaxService',
-    function($scope, initData, ajaxService)
-{
-    ajaxService({a:1});
+    '$scope', 'initData', 'ajaxService',
+    function($scope, initData, ajaxService) {
     /* define */
     $scope.accountText = initData.account.text;
     $scope.accountValue = initData.account.value;
@@ -40,6 +36,9 @@ app
     $scope.arySexObj = initData.sex.data;
 
     $scope.operateStatus = initData.showStatus.operate;
+
+    //exterial service from another module
+    $scope.ajaxService = ajaxService;
 
     //watchg
     $scope.$watch('operateStatus', function(newVar, oldVar) {
@@ -82,13 +81,16 @@ app
 }]);
 
 //Routing Controller Zone
-app
-.controller('SuccessController', ['$scope', '$routeParams', function($scope, $routeParams) {
+App
+.controller('SuccessController', [
+    '$scope', '$routeParams',
+    function($scope, $routeParams) {
+    console.log($scope.$parent.ajaxService);
     this.account = $routeParams.account;
 }]);
 
 //Init Data
-app
+App
 .factory('initData', function() {
     var objInitData = {
         account: {

@@ -1,9 +1,9 @@
 "use strict";
 
-var app = angular.module('AppNG');
+var UtilityApp = angular.module('UtilityApp', []);
 
 //Service
-app
+UtilityApp
 .factory('ajaxService', function($http) {
     var objDefaultDefind = {
 
