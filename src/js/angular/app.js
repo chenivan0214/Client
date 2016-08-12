@@ -76,7 +76,7 @@ angular.module('IndexApp')
 //Routing Controller Zone
 angular.module('IndexApp')
 .controller('SuccessController', ['$scope', '$routeParams', function($scope, $routeParams) {
-    this.account = $routeParams.account
+    this.account = $routeParams.account;
 }]);
 
 //Init Data

@@ -32,7 +32,7 @@ module.exports = function(grunt) {
             html: {
                 options: {},
                 files: ['src/html/**/*'],
-                tasks: ['copy']
+                tasks: ['copyHTML']
             },
             sass: {
                 options: {},
@@ -41,21 +41,8 @@ module.exports = function(grunt) {
             },
             script: {
                 options: {},
-                files: ['src/js/*'],
-                tasks: ['jshint', 'uglify']
-            },
-            angular: {
-                options: {},
-                files: ['src/js/angular/**/*'],
-                tasks: ['ngAnnotate', 'concat']
-            }
-        },
-        copy: {
-            main: {
-                files: [
-                    { expand: true, cwd: 'src/html/', src: '*', dest: 'dist/', filter: 'isFile'},
-                    { expand: true, cwd: 'src/html/view/', src: '*', dest: 'dist/view', filter: 'isFile'}
-                ]
+                files: ['src/js/**'],
+                tasks: ['jshint', 'copyJS']
             }
         },
         sass: {
@@ -68,6 +55,22 @@ module.exports = function(grunt) {
                 }
             }
         },
+        copy: {
+            main: {
+            },
+            html: {
+                files: [
+                    { expand: true, cwd: 'src/html/', src: '*', dest: 'dist', filter: 'isFile'},
+                    { expand: true, cwd: 'src/html/view/', src: '*', dest: 'dist/view', filter: 'isFile'}
+                ]
+            },
+            js: {
+                files: [
+                    { expand: true, cwd: 'src/js/', src: '*', dest: 'dist/js', filter: 'isFile'},
+                    { expand: true, cwd: 'src/js/angular/', src: '*', dest: 'dist/js', filter: 'isFile'}
+                ]
+            }
+        },
         uglify: {
             options: {},
             build: {
@@ -75,39 +78,16 @@ module.exports = function(grunt) {
                 dest: 'dist/js/common.min.js'
             }
         },
-        ngAnnotate: {
-            options: {
-                singleQuotes: true
-            },
-            app: {
-                files: {
-                    'src/js/angular_min/index_app.js': ['src/js/angular/index_app.js']
-                }
-            }
-        },
         jshint: {
             options: {
-                node: true
+                jshintrc: '.jshintrc'
             },
             build: [ 'src/js/**/*']
-        },
-        concat: {
-           angular: {
-               src: [
-                   'src/js/angular_min/index_app.js'
-               ],
-               dest: 'dist/js/angular_app.js'
-           }
         }
     });
 
-    grunt.registerTask('default', [
-        'copy',
-        'sass',
-        'uglify',
-        'ngAnnotate',
-        'jshint',
-        'concat'
-    ]);
+    grunt.registerTask('default', ['sass', 'uglify', 'jshint']);
+    grunt.registerTask('copyHTML', ['copy:html']);
+    grunt.registerTask('copyJS', ['copy:js']);
     grunt.registerTask('server', ['connect', 'watch']);
 };
