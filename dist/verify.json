@@ -1,0 +1,6 @@
+{
+    "account": "account",
+    "password": "password",
+    "sex": "M",
+    "favorite": ["Phone", "Computer"]
+}

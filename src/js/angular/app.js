@@ -19,8 +19,8 @@ App
 .controller('MainController', ['$scope', function($scope) {
 }])
 .controller('IndexFormController', [
-    '$scope', 'initData', 'ajaxService',
-    function($scope, initData, ajaxService) {
+    '$scope', '$location', 'initData','ajaxService',
+    function($scope, $location, initData, ajaxService) {
     /* define */
     $scope.accountText = initData.account.text;
     $scope.accountValue = initData.account.value;
@@ -28,12 +28,14 @@ App
     $scope.passwordText = initData.password.text;
     $scope.passwordValue = initData.password.value;
 
-    $scope.favoriteText = initData.favorite.text;
-    $scope.aryFavoriteObj = initData.favorite.data;
-    $scope.aryCheckedFavorite = [];
-
     $scope.sexText = initData.sex.text;
     $scope.arySexObj = initData.sex.data;
+
+    $scope.favoriteText = initData.favorite.text;
+    $scope.aryFavoriteObj = initData.favorite.data;
+    $scope.checkedCount = 0;
+
+    $scope.errorCode = "";
 
     $scope.operateStatus = initData.showStatus.operate;
 
@@ -42,39 +44,75 @@ App
 
     //watchg
     $scope.$watch('operateStatus', function(newVar, oldVar) {
-         console.log(newVar + "/" + oldVar);
+         //console.log(newVar + "/" + oldVar);
     });
 
     /* event */
     //click
     $scope.fnShowOperate = function($event) {
-        console.log($event);
-        $scope.operateStatus = ! $scope.operateStatus;
+        var isVerifyed = true;
+
+        $scope.errorCode = "";
+
+        if (_.isEmpty($scope.accountValue) || _.isUndefined($scope.accountValue)) {
+            isVerifyed = false;
+            $scope.errorCode = "11";
+        } else if (_.isEmpty($scope.passwordValue) || _.isUndefined($scope.passwordValue)) {
+            isVerifyed = false;
+            $scope.errorCode = "21";
+        } else if (_.isUndefined($scope.sex)) {
+            isVerifyed = false;
+            $scope.errorCode = "31";
+        } else if ($scope.checkedCount === 0) {
+            isVerifyed = false;
+            $scope.errorCode = "41";
+        }
+
+        if (isVerifyed === true) {
+            $scope.operateStatus = !$scope.operateStatus;
+        }
     };
 
     $scope.fnChangeAccount = function() {
-        console.log($scope.accountValue);
+        //do something
     };
 
     $scope.fnChangePassword = function() {
-        console.log($scope.passwordValue);
+        //do something
     };
 
     $scope.fnChangeSex = function() {
-        console.log($scope.sex.value + "/" + $scope.sex.text);
+        //console.log($scope.sex.value + "/" + $scope.sex.text);
     };
 
     $scope.fnClickFavorite = function($event, $index, value) {
         var target = $event.target;
+        //console.log($index + "/" + value);
 
         if (target.checked) {
-            console.log($index + "/" + value);
+            $scope.checkedCount++;
+            $scope.aryFavoriteObj[$index].isChecked = true;
+        } else {
+            $scope.checkedCount--;
+            $scope.aryFavoriteObj[$index].isChecked = false;
         }
     };
 
     $scope.fnSubmit = function($event) {
-        console.log($event);
-        console.log($scope.indexForm.$error);
+        if ($event.type === "click") {
+            var options = {
+                    method: "GET",
+                    url: "/verify.json",
+                    fnSuccess: function(data, header, config, status) {
+                        $location.path("/success/" + data.account);
+                    },
+                    fnError: function(data, header, config, status) {
+                        //do something
+                    }
+                };
+
+            ajaxService(options);
+        }
     };
 }])
 .controller('OperateController', ['$scope', function($scope) {
@@ -85,7 +123,7 @@ App
 .controller('SuccessController', [
     '$scope', '$routeParams',
     function($scope, $routeParams) {
-    console.log($scope.$parent.ajaxService);
+    //console.log($scope.$parent.ajaxService);
     this.account = $routeParams.account;
 }]);
 
@@ -104,10 +142,10 @@ App
         favorite: {
             text: "Favorite:",
             data: [
-                {text: "Phone", value: "phone"},
-                {text: "Compute", value: "compute"},
-                {text: "TV", value: "tv"},
-                {text: "Car", value: "car"},
+                {text: "Phone", value: "phone", isChecked: false},
+                {text: "Computer", value: "computer", isChecked: false},
+                {text: "TV", value: "tv", isChecked: false},
+                {text: "Car", value: "car", isChecked: false},
             ]
         },
         sex: {

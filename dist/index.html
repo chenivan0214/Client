@@ -6,6 +6,7 @@
 <script src="http://localhost:35729/livereload.js"></script>
 <script src="./js/include/angular.min.js"></script>
 <script src="./js/include/angular-route.min.js"></script>
+<script src="./js/include/lodash.min.js"></script>
 <link href="./css/style.css" rel="stylesheet" type="text/css" media="screen"></link>
 </head>
 <body>
@@ -27,9 +28,14 @@
                             ng-minlength="5"
                             ng-maxlength="10"
                             ng-pattern="/^.[A-Za-z0-9]+$/"
-                            ng-required="true"
                             ng-change="fnChangeAccount()"
                         />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="left">
+                        <div class="red" ng-class="{true: 'show', false: 'hide'}[errorCode == '11']">Account is not correct!</div>
                     </td>
                 </tr>
                 <tr>
@@ -40,9 +46,14 @@
                             ng-minlength="5"
                             ng-maxlength="10"
                             ng-pattern="/^.[A-Za-z0-9]+$/"
-                            ng-required="true"
                             ng-change="fnChangePassword()"
                         />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="left">
+                        <div class="red" ng-class="{true: 'show', false: 'hide'}[errorCode == '21']">Password is not correct!</div>
                     </td>
                 </tr>
                 <tr>
@@ -57,15 +68,26 @@
                      </td>
                 </tr>
                 <tr>
+                    <td></td>
+                    <td align="left">
+                        <div class="red" ng-class="{true: 'show', false: 'hide'}[errorCode == '31']">Choose your sex!</div>
+                    </td>
+                </tr>
+                <tr>
                     <td><span ng-bind="favoriteText"></span></td>
                     <td align="left">
                         <div ng-repeat="favoriteObj in aryFavoriteObj" ng-class-odd="'red_bk'" ng-class-even="'gray_bk'">
                             <input type="checkbox" name="favorite[]" value="{{favoriteObj.value}}"
-                                ng-required="true"
                                 ng-click="fnClickFavorite($event, $index, favoriteObj.value)"
                             />
                             {{$index+1}}-{{favoriteObj.text}}
                         </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="left">
+                        <div class="red" ng-class="{true: 'show', false: 'hide'}[errorCode == '41']">Choose your favorite!</div>
                     </td>
                 </tr>
                 <tr>
@@ -78,7 +100,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button ng-click="fnSubmit($event)">Submit</button>
+                        
                     </td>
                 </tr>
             </table>
@@ -106,11 +128,9 @@ angular.bootstrap(document.getElementById("UtilityApp"), ['UtilityApp']);
 
 <script type="text/ng-template" id="operateTpl">
 <div ng-controller="OperateController">
-    <div class="m20"></div>
     <table>
         <tr>
-            <td>dd</td>
-            <td></td>
+            <td colspan="2"><button ng-click="fnSubmit($event)">Submit</button></td>
         </tr>
     </table>
 <div>

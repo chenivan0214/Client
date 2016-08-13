@@ -2,6 +2,7 @@
     "node": true,
     "globals": {
         "angular": false,
-        "module": false
+        "module": false,
+        "_": false
     }
 }
