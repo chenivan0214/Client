@@ -54,13 +54,13 @@ App
 
         $scope.errorCode = "";
 
-        if (_.isEmpty($scope.accountValue) || _.isUndefined($scope.accountValue)) {
+        if (angular.equals("", $scope.accountValue) || angular.isUndefined($scope.accountValue)) {
             isVerifyed = false;
             $scope.errorCode = "11";
-        } else if (_.isEmpty($scope.passwordValue) || _.isUndefined($scope.passwordValue)) {
+        } else if (angular.equals("", $scope.passwordValue) || angular.isUndefined($scope.passwordValue)) {
             isVerifyed = false;
             $scope.errorCode = "21";
-        } else if (_.isUndefined($scope.sex)) {
+        } else if (angular.isUndefined($scope.sex)) {
             isVerifyed = false;
             $scope.errorCode = "31";
         } else if ($scope.checkedCount === 0) {

@@ -18,17 +18,17 @@ UtilityApp
         },
         ajaxService = function(options) {
             $http({
-                method: !_.isEmpty(options.method) ? options.method : objDefaultDefind.method,
+                method: !angular.isUndefined(options.method) ? options.method : objDefaultDefind.method,
                 url: options.url,
                 headers: {
                     "Pragma": objDefaultDefind.header.pragma,
-                    "Content-Type": !_.isUndefined(options.contentType) ? options.contentType : objDefaultDefind.header.contentType,
-                    "Accept": !_.isUndefined(options.accept) ? options.accept : objDefaultDefind.header.accept,
+                    "Content-Type": !angular.isUndefined(options.contentType) ? options.contentType : objDefaultDefind.header.contentType,
+                    "Accept": !angular.isUndefined(options.accept) ? options.accept : objDefaultDefind.header.accept,
                 },
-                date: !_.isEmpty(options.data) ? options.data : objDefaultDefind.data
+                date: !angular.isUndefined(options.data) ? options.data : objDefaultDefind.data
             })
-            .success(_.isFunction(options.fnSuccess) ? options.fnSuccess : objDefaultDefind.fnSuccess)
-            .error(_.isFunction(options.fnError) ? options.fnError : objDefaultDefind.fnError);
+            .success(angular.isFunction(options.fnSuccess) ? options.fnSuccess : objDefaultDefind.fnSuccess)
+            .error(angular.isFunction(options.fnError) ? options.fnError : objDefaultDefind.fnError);
         };
 
     return ajaxService;
