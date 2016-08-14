@@ -2,4 +2,4 @@
 https://checkcheckzz.gitbooks.io/angularjs-learning-notes/content/chapter1/chapter1.html
 
 進度
-p139
+15

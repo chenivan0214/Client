@@ -19,8 +19,8 @@ App
 .controller('MainController', ['$scope', function($scope) {
 }])
 .controller('IndexFormController', [
-    '$scope', '$location', 'initData','ajaxService',
-    function($scope, $location, initData, ajaxService) {
+    '$scope', '$location', '$cacheFactory', '$log', 'initData','ajaxService',
+    function($scope, $location, $cacheFactory, $log, initData, ajaxService) {
     /* define */
     $scope.accountText = initData.account.text;
     $scope.accountValue = initData.account.value;
@@ -35,9 +35,10 @@ App
     $scope.aryFavoriteObj = initData.favorite.data;
     $scope.checkedCount = 0;
 
+    $scope.pageStage = "1";
     $scope.errorCode = "";
-
     $scope.operateStatus = initData.showStatus.operate;
+    $scope.cache = $cacheFactory('cache');
 
     //exterial service from another module
     $scope.ajaxService = ajaxService;
@@ -104,6 +105,11 @@ App
                     method: "GET",
                     url: "/verify.json",
                     fnSuccess: function(data, header, config, status) {
+                        //$log.debug(data);
+                        $scope.pageStage = "2";
+                        $scope.operateStatus = false;
+                        $scope.cache.put('data', data);
+                        //console.log($scope.cache.get('data'));
                         $location.path("/success/" + data.account);
                     },
                     fnError: function(data, header, config, status) {
@@ -124,7 +130,11 @@ App
     '$scope', '$routeParams',
     function($scope, $routeParams) {
     //console.log($scope.$parent.ajaxService);
-    this.account = $routeParams.account;
+    $scope.account = $routeParams.account;
+
+    $scope.fnGoBack = function() {
+        window.location.reload();
+    };
 }]);
 
 //Init Data

@@ -1,6 +1,7 @@
 {
     "node": true,
     "globals": {
+        "window": false,
         "angular": false,
         "module": false,
         "_": false
