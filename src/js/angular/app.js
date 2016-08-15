@@ -1,6 +1,6 @@
 "use strict";
 
-var App = angular.module('App', ['ngRoute', 'UtilityApp']);
+var App = angular.module('App', ['ngRoute']);
 
 App
 .config(['$routeProvider', function($routeProvider) {
@@ -19,9 +19,11 @@ App
 .controller('MainController', ['$scope', function($scope) {
 }])
 .controller('IndexFormController', [
-    '$scope', '$location', '$cacheFactory', '$log', 'initData','ajaxService',
-    function($scope, $location, $cacheFactory, $log, initData, ajaxService) {
+    '$scope', '$location', '$cacheFactory', '$log', '$injector',
+    function($scope, $location, $cacheFactory, $log, $injector) {
     /* define */
+    var initData = $injector.get('initData');
+
     $scope.accountText = initData.account.text;
     $scope.accountValue = initData.account.value;
 
@@ -39,9 +41,6 @@ App
     $scope.errorCode = "";
     $scope.operateStatus = initData.showStatus.operate;
     $scope.cache = $cacheFactory('cache');
-
-    //exterial service from another module
-    $scope.ajaxService = ajaxService;
 
     //watchg
     $scope.$watch('operateStatus', function(newVar, oldVar) {
@@ -101,7 +100,8 @@ App
 
     $scope.fnSubmit = function($event) {
         if ($event.type === "click") {
-            var options = {
+            var ajaxService = angular.injector(['UtilityApp', 'ng']).get('ajaxService'),
+                options = {
                     method: "GET",
                     url: "/verify.json",
                     fnSuccess: function(data, header, config, status) {
@@ -129,7 +129,6 @@ App
 .controller('SuccessController', [
     '$scope', '$routeParams',
     function($scope, $routeParams) {
-    //console.log($scope.$parent.ajaxService);
     $scope.account = $routeParams.account;
 
     $scope.fnGoBack = function() {
