@@ -34,6 +34,7 @@ App
     $scope.arySexObj = initData.sex.data;
 
     $scope.favoriteText = initData.favorite.text;
+    $scope.favoriteStatus = 1;
     $scope.aryFavoriteObj = initData.favorite.data;
     $scope.checkedCount = 0;
 
@@ -49,6 +50,20 @@ App
 
     /* event */
     //click
+    $scope.fnChangeFavorite = function($event) {
+        if ($scope.favoriteStatus === 1) {
+            $scope.aryFavoriteObj = [
+                {text: "Store", value: "store", isChecked: false},
+                {text: "mall", value: "mall", isChecked: false}
+            ];
+
+            $scope.favoriteStatus = 2;
+        } else {
+            $scope.favoriteStatus = 1;
+            $scope.aryFavoriteObj = initData.favorite.data;
+        }
+    };
+
     $scope.fnShowOperate = function($event) {
         var isVerifyed = true;
 
