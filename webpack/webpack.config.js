@@ -1,7 +1,7 @@
 "use strict";
 
-var webpack = require('webpack'),
-    port = 8000;
+var Webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: [
@@ -27,9 +27,14 @@ module.exports = {
     devServer: {
         hot: true,
         inline: true,
-        port: port
+        port: 8000
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new Webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin({
+            template: "./build/index.html",
+            filename: "index.html",
+            inject: "body",
+        })
     ]
 };
