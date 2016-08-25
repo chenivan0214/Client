@@ -1,16 +1,23 @@
 import React from 'react';
 
-var props = {
-        name: "me",
-        age: "20"
-    };
+var Sample = React.createClass({
+        render: function() {
+            return (
+                <div>
+                    <SampleChild data={this.props.data}/>
+                </div>
+            );
+        }
+    });
 
-var Person = (
-    <div {...props}>
-        {/* 註解 */}
-        <div>Name</div>
-    </div>
+var SampleChild = React.createClass({
+        render: function() {
+            return (
+                <div>
+                    <h1>It is {this.props.data.firstName} {this.props.data.lastName}.</h1>
+                </div>
+            );
+        }
+    });
 
-);
-
-module.exports = Person;
+module.exports = Sample;
