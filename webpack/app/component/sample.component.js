@@ -1,10 +1,12 @@
 import React from 'react';
 
-var attrs = {
-       name: "me"
+var props = {
+        name: "me",
+        age: "20"
     };
+
 var Person = (
-    <div {...attrs} _age=>
+    <div {...props}>
         {/* 註解 */}
         <div>Name</div>
     </div>
