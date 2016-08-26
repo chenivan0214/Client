@@ -1,10 +1,23 @@
 import React from 'react';
 
 var Sample = React.createClass({
+        getInitialState: function() {
+            return {isReload: false};
+        },
+        handleClick: function(event) {
+            this.setState({isReload: !this.state.isReload});
+        },
         render: function() {
+            var text = null;
+
+            if (this.state.isReload)
+                text = "Default";
+            else
+                text = "Not Default";
+
             return (
-                <div>
-                    <SampleChild data={this.props.data}/>
+                <div onClick={this.handleClick}>
+                    <SampleChild data={this.props.data} text={text}/>
                 </div>
             );
         }
@@ -13,9 +26,9 @@ var Sample = React.createClass({
 var SampleChild = React.createClass({
         render: function() {
             return (
-                <div>
-                    <h1>It is {this.props.data.firstName} {this.props.data.lastName}.</h1>
-                </div>
+                <span>
+                    <h1>It is {this.props.data.firstName} {this.props.data.lastName}({this.props.text}).</h1>
+                </span>
             );
         }
     });
