@@ -1,6 +1,6 @@
 import React from 'react';
 
-var Sample = React.createClass({
+const Sample = React.createClass({
         getInitialState: function() {
             return {isReload: false};
         },
@@ -23,7 +23,7 @@ var Sample = React.createClass({
         }
     });
 
-var SampleChild = React.createClass({
+const SampleChild = React.createClass({
         render: function() {
             return (
                 <span>
