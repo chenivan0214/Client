@@ -1,3 +1,5 @@
+"use strict";
+
 import React from 'react';
 
 const List = (props) => (
@@ -19,31 +21,43 @@ class Sample extends React.Component {
         this.onClickAdd = this.onClickAdd.bind(this);
         this.onClickRedure = this.onClickRedure.bind(this);
         this.onClickClear = this.onClickClear.bind(this);
+        this.onClickRemove = this.onClickRemove.bind(this);
 
         this.state = {
-            clickCount: 0
+            dataCount: 0
         };
     }
 
     onClickAdd(e) {
-        this.setState({
-            clickCount: ++this.state.clickCount
-        });
+        let thisObj = this;
+        let objAjaxOption = {
+                method: "GET",
+                url: "./ajax/sample2_data.json",
+                success: function(data) {
+                    _.map(data.data, function(item) {
+                        let dataCount = thisObj.state.dataCount + 1,
+                            nextId = thisObj.props.data.length + 1,
+                            nextText = dataCount + "-" + item,
+                            nextData = { id: nextId, text: nextText };
 
+                        thisObj.props.data.push(nextData);
 
-        var nextId = this.props.data.length + 1,
-            nextText = "No." + nextId,
-            nextData = { id: nextId, text: nextText };
+                        thisObj.setState({
+                            dataCount: ++thisObj.state.dataCount
+                        });
+                    });
+                }
+            };
 
-        this.props.data.push(nextData);
+        $.ajax(objAjaxOption);
     }
 
     onClickRedure(e) {
         this.setState({
-            clickCount: ++this.state.clickCount
+            dataCount: ++this.state.dataCount
         });
 
-        if (this.state.clickCount !== 0) {
+        if (this.state.dataCount !== 0) {
             this.props.data.pop();
         }
     }
@@ -51,20 +65,54 @@ class Sample extends React.Component {
     onClickClear() {
         this.props.data.length = 0;
         this.setState({
-            clickCount: ++this.state.clickCount
+            dataCount: ++this.state.dataCount
         });
+    }
+
+    onClickRemove() {
+    }
+
+    componentWillMount() {
+        console.log('Init: componentWillMount');
+    }
+
+    componentDidMount() {
+        console.log('Init: componentDidMount');
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('modify: componentWillReceiveProps');
+        console.log(nextProps);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('modify: shouldComponentUpdate');
+        return true;
+    }
+
+    componentWillUpdate() {
+        console.log('modify: componentWillUpdate');
+    }
+
+    componentDidUpdate() {
+        console.log('modify: componentDidUpdate');
+    }
+
+    componentWillUnmount() {
+        console.log('componentWillUnmount');
     }
 
     render() {
         return (
             <div>
                 <div>
-                    Click count:{this.state.clickCount}
+                    data count:{this.state.dataCount}
                 </div>
                 <div>
                     <button type="button" onClick={this.onClickAdd}>Add</button>
                     <button type="button" onClick={this.onClickRedure}>Reduce</button>
                     <button type="button" onClick={this.onClickClear}>Clear</button>
+                    <button type="button" onClick={this.onClickRemove}>Remove</button>
                 </div>
                 <List data={this.props.data}/>
             </div>
@@ -73,11 +121,11 @@ class Sample extends React.Component {
 };
 
 Sample.propTypes = {
-    data: React.PropTypes.array,
+    data: React.PropTypes.array
 }
 
 Sample.defaultProps = {
-    data: [],
+    data: []
 }
 
 module.exports = Sample;
