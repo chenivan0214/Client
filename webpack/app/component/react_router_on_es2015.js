@@ -1,9 +1,9 @@
 "use strict";
 
 import React from 'react';
-import {Link, IndexLink} from 'react-router';
+import { Link, IndexLink } from 'react-router';
 
-const Sample = (props) => (
+const App = (props) => (
         <div>
             <p>-<IndexLink to="/">Home</IndexLink></p>
             <p>-<Link to="/store">Store</Link></p>
@@ -15,7 +15,7 @@ const Sample = (props) => (
         </div>
     )
 
-Sample.propTypes = {
+App.propTypes = {
     children: React.PropTypes.object,
 };
 
@@ -41,9 +41,4 @@ StoreHasName.propTypes = {
     params: React.PropTypes.object,
 };
 
-module.exports = {
-    Sample: Sample,
-    Home: Home,
-    Store: Store,
-    StoreHasName: StoreHasName
-};
+export { App, Home, Store, StoreHasName };

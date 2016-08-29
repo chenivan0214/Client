@@ -128,4 +128,4 @@ Sample.defaultProps = {
     data: []
 }
 
-module.exports = Sample;
+export default Sample;

@@ -35,4 +35,4 @@ const SampleChild = React.createClass({
         }
     });
 
-module.exports = Sample;
+export default Sample;
