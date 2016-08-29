@@ -4,13 +4,14 @@ var Webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: [
-        "webpack/hot/dev-server",
-        "./app/main.js"
-    ],
+    entry: {
+        basic_react_on_native: ["webpack/hot/dev-server", "./app/entry/basic_react_on_native.js"],
+        basic_react_on_es2015: ["webpack/hot/dev-server", "./app/entry/basic_react_on_es2015.js"],
+        react_router_on_es2015: ["webpack/hot/dev-server", "./app/entry/react_router_on_es2015.js"],
+    },
     output: {
         path: "./build",
-        filename: "./js/bundle.js"
+        filename: "./js/[name].bundle.js"
     },
     module: {
         loaders: [
@@ -30,16 +31,6 @@ module.exports = {
         port: 8000
     },
     plugins: [
-        new Webpack.HotModuleReplacementPlugin(),
-        new HtmlWebpackPlugin({
-            template: "./build/react.html",
-            filename: "react.html",
-            inject: "body",
-        }),
-        new HtmlWebpackPlugin({
-            template: "./build/react_flux.html",
-            filename: "react_flux.html",
-            inject: "body",
-        })
+        new Webpack.HotModuleReplacementPlugin()
     ]
 };

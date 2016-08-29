@@ -13,7 +13,6 @@ const Sample = (props) => (
                 {props.children}
             </div>
         </div>
- 
     )
 
 Sample.propTypes = {
@@ -43,7 +42,7 @@ StoreHasName.propTypes = {
 };
 
 module.exports = {
-    Sample03: Sample,
+    Sample: Sample,
     Home: Home,
     Store: Store,
     StoreHasName: StoreHasName
