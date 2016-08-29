@@ -12,5 +12,5 @@ var data = {
         lastName: "Chen"
     };
 
-import Sample from '../component/basic_react_on_native.js';
+import Sample from '../component/basic_react_es5.component.js';
 ReactDOM.render(<Sample data={data}/>, document.getElementById('app'));

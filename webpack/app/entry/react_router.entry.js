@@ -8,8 +8,8 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
  ** stage
  ** - react-router
  **/
-import { App, Home, Store, StoreHasName } from '../component/react_router_on_es2015.js';
-console.log(Store);
+import { App, Home, Store, StoreHasName } from '../component/react_router.component.js';
+
 ReactDOM.render(
     <Router history={hashHistory}>
         <Route path='/' component={App}>

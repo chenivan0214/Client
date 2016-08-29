@@ -8,10 +8,10 @@ import ReactDOM from 'react-dom';
  ** - state & props
  ** - lifecycle
  **/
-import Sample from '../component/basic_react_on_es2015.js';
+import Sample from '../component/basic_react.component.js';
 ReactDOM.render(<Sample/>, document.getElementById('app'));
 
-//trigger other life cycle on basic_react_on_es2015.js
+//trigger other life cycle on basic_react.js
 setTimeout(() => {
     ReactDOM.render(<Sample otherProps={'nothing'}/>, document.getElementById('app'));
     ReactDOM.unmountComponentAtNode(document.getElementById('app'));
