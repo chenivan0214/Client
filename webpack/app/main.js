@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 /**
- ** Sample01 on native js 
+ ** Sample01 on native js
  ** - component
  ** - state & props
  **/
@@ -21,7 +21,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
  ** Sample02 on es2015
  ** - component
  ** - state & props
- ** - life cycle   
+ ** - life cycle
  **/
 //import Sample02 from './component/sample02.component.js';
 //ReactDOM.render(<Sample02/>, document.getElementById('app'));
@@ -36,13 +36,13 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
  ** Sample03 on es2015
  ** - router
  **/
-import { Sample03, Home, Store, StoreHasName } from './component/sample03.component.js';
-ReactDOM.render(
-    <Router history={hashHistory}>
-        <Route path='/' component={Sample03}>
-            <IndexRoute component={Home}/>
-            <Route path='/store' component={Store}/>
-            <Route path='store/:name' component={StoreHasName}/>
-        </Route>
-    </Router>
-    , document.getElementById('app'));
+//import { Sample03, Home, Store, StoreHasName } from './component/sample03.component.js';
+//ReactDOM.render(
+//    <Router history={hashHistory}>
+//        <Route path='/' component={Sample03}>
+//            <IndexRoute component={Home}/>
+//            <Route path='/store' component={Store}/>
+//            <Route path='store/:name' component={StoreHasName}/>
+//        </Route>
+//    </Router>
+//    , document.getElementById('app'));

@@ -35,6 +35,11 @@ module.exports = {
             template: "./build/react.html",
             filename: "react.html",
             inject: "body",
+        }),
+        new HtmlWebpackPlugin({
+            template: "./build/react_flux.html",
+            filename: "react_flux.html",
+            inject: "body",
         })
     ]
 };
