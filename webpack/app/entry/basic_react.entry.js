@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom';
 /**
  ** stage
  ** - state & props
- ** - css
+ ** - css(style-load、css-loader)
+ ** - img(url-load)
  ** - lifecycle
  **/
 import Sample from '../component/basic_react.component.js';
