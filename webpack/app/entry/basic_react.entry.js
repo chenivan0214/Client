@@ -6,9 +6,10 @@ import ReactDOM from 'react-dom';
 /**
  ** stage
  ** - state & props
- ** - css(style-load、css-loader)
- ** - img(url-load)
  ** - lifecycle
+ ** - css(style-load、css-loader)
+ ** - img(url-loader)
+ ** - json(json-loader) 
  **/
 import Sample from '../component/basic_react.component.js';
 ReactDOM.render(<Sample/>, document.getElementById('app'));

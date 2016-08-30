@@ -4,6 +4,7 @@ import React from 'react';
 import GlobalCSS from '!style!css!../resource/css/global.css';
 import ButtonCSS from '!style!css!../resource/css/button.css';
 import LogoImg from '!url!../resource/img/react.png';
+import DataJSON from '!json!../resource/json/data.json';
 
 const List = (props) => (
         <div>
@@ -27,8 +28,10 @@ class Sample extends React.Component {
         this.onClickRemove = this.onClickRemove.bind(this);
 
         this.state = {
-            dataCount: 0
+            dataCount: 1
         };
+
+        this.props.data.push({id: 1, text: "1-" + DataJSON.data});
     }
 
     onClickAdd(e) {
