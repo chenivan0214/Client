@@ -1,6 +1,8 @@
 "use strict";
 
 import React from 'react';
+import GlobalCSS from '!style!css!../resource/css/global.css';
+import ButtonCSS from '!style!css!../resource/css/button.css';
 
 const List = (props) => (
         <div>
@@ -105,7 +107,7 @@ class Sample extends React.Component {
     render() {
         return (
             <div>
-                <div>
+                <div className={ButtonCSS.normal + " " + GlobalCSS.color_red}>
                     data count:{this.state.dataCount}
                 </div>
                 <div>
