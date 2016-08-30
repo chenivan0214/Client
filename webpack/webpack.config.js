@@ -27,6 +27,10 @@ module.exports = {
             {
                 test: /\.css$/,
                 loader: 'style!css!autoprefixer'
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif|woff)$/,
+                loader: 'url-loader'
             }
         ]
     },

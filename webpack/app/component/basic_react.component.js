@@ -3,6 +3,7 @@
 import React from 'react';
 import GlobalCSS from '!style!css!../resource/css/global.css';
 import ButtonCSS from '!style!css!../resource/css/button.css';
+import LogoImg from '!url!../resource/img/react.png';
 
 const List = (props) => (
         <div>
@@ -105,18 +106,23 @@ class Sample extends React.Component {
     }
 
     render() {
+        const bodyStyle = {marginLeft: "260px"};
+
         return (
             <div>
-                <div className={ButtonCSS.normal + " " + GlobalCSS.color_red}>
-                    data count:{this.state.dataCount}
-                </div>
-                <div>
+                <div><img src={LogoImg}/></div>
+                <br/>
+                <div style={bodyStyle}>
+                    <span className={ButtonCSS.normal + " " + GlobalCSS.color_red}>
+                        data count:{this.state.dataCount}
+                    </span>
+                    <br/>
                     <button type="button" onClick={this.onClickAdd}>Add</button>
                     <button type="button" onClick={this.onClickRedure}>Reduce</button>
                     <button type="button" onClick={this.onClickClear}>Clear</button>
                     <button type="button" onClick={this.onClickRemove}>Remove</button>
+                    <List data={this.props.data}/>
                 </div>
-                <List data={this.props.data}/>
             </div>
         )
     }
