@@ -19,6 +19,14 @@ const List = (props) => (
     )
 
 class Sample extends React.Component {
+    static defaultProps = {
+        data: []
+    };
+
+    static propTypes = {
+        data: React.PropTypes.array
+    };
+
     constructor(props) {
         super(props);
 
@@ -130,13 +138,5 @@ class Sample extends React.Component {
         )
     }
 };
-
-Sample.propTypes = {
-    data: React.PropTypes.array
-}
-
-Sample.defaultProps = {
-    data: []
-}
 
 export default Sample;
