@@ -8,7 +8,8 @@ module.exports = {
         basic_react_es5: ["webpack/hot/dev-server", "./app/entry/basic_react_es5.entry.js"],
         basic_react: ["webpack/hot/dev-server", "./app/entry/basic_react.entry.js"],
         react_router: ["webpack/hot/dev-server", "./app/entry/react_router.entry.js"],
-        flux: ["webpack/hot/dev-server", "./app/entry/flux.entry.js"]
+        flux: ["webpack/hot/dev-server", "./app/entry/flux.entry.js"],
+        redux: ["webpack/hot/dev-server", "./app/entry/redux.entry.js"]
     },
     output: {
         path: "./build",
