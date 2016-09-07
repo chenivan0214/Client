@@ -1,0 +1,7 @@
+body {
+    margin: 0 auto;
+}
+
+:local(.color_red) {
+    color: #ff0000;
+}
