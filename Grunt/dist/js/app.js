@@ -7,8 +7,7 @@ App
     $routeProvider
     .when('/success/:account', {
         templateUrl: 'view/success.html',
-        controller: 'SuccessController',
-        controllerAs: 'successApp'
+        controller: 'SuccessController'
     });
 }])
 .run(['$rootScope', '$timeout', function($rootScope, $timeout) {
@@ -19,8 +18,8 @@ App
 .controller('MainController', ['$scope', function($scope) {
 }])
 .controller('IndexFormController', [
-    '$scope', '$location', '$cacheFactory', '$log', '$injector',
-    function($scope, $location, $cacheFactory, $log, $injector) {
+    '$scope', '$rootScope','$location', '$cacheFactory', '$log', '$injector',
+    function($scope, $rootScope, $location, $cacheFactory, $log, $injector) {
     /* define */
     var initData = $injector.get('initData');
 
@@ -38,8 +37,8 @@ App
     $scope.aryFavoriteObj = initData.favorite.data;
     $scope.checkedCount = 0;
 
-    $scope.pageStage = "1";
-    $scope.errorCode = "";
+    $scope.pageStage = $location.url() === "" ? "1" : "2";
+    $scope.errorCode = [];
     $scope.operateStatus = initData.showStatus.operate;
     $scope.cache = $cacheFactory('cache');
 
@@ -67,20 +66,26 @@ App
     $scope.fnShowOperate = function($event) {
         var isVerifyed = true;
 
-        $scope.errorCode = "";
+        $scope.errorCode = [];
 
         if (angular.equals("", $scope.accountValue) || angular.isUndefined($scope.accountValue)) {
             isVerifyed = false;
-            $scope.errorCode = "11";
-        } else if (angular.equals("", $scope.passwordValue) || angular.isUndefined($scope.passwordValue)) {
+            $scope.errorCode.push("11");
+        }
+
+        if (angular.equals("", $scope.passwordValue) || angular.isUndefined($scope.passwordValue)) {
             isVerifyed = false;
-            $scope.errorCode = "21";
-        } else if (angular.isUndefined($scope.sex)) {
+            $scope.errorCode.push("21");
+        }
+
+        if (angular.isUndefined($scope.sex)) {
             isVerifyed = false;
-            $scope.errorCode = "31";
-        } else if ($scope.checkedCount === 0) {
+            $scope.errorCode.push("31");
+        }
+
+        if ($scope.checkedCount === 0) {
             isVerifyed = false;
-            $scope.errorCode = "41";
+            $scope.errorCode.push("41");
         }
 
         if (isVerifyed === true) {
@@ -120,12 +125,19 @@ App
                     method: "GET",
                     url: "/verify.json",
                     fnSuccess: function(data, header, config, status) {
-                        //$log.debug(data);
-                        $scope.pageStage = "2";
-                        $scope.operateStatus = false;
-                        $scope.cache.put('data', data);
-                        //console.log($scope.cache.get('data'));
-                        $location.path("/success/" + data.account);
+                        $scope.errorCode = [];
+
+                        if (data.account === $scope.accountValue) {
+                            $scope.errorCode.push('11');
+                            $scope.$applyAsync();
+                        } else {
+                            $scope.pageStage = "2";
+                            $scope.operateStatus = false;
+                            $scope.cache.put('data', data);
+                            $rootScope.$apply(function() {
+                                $location.path("/success/" + $scope.accountValue).replace();
+                            });
+                        }
                     },
                     fnError: function(data, header, config, status) {
                         //do something

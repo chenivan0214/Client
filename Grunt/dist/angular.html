@@ -8,19 +8,27 @@
 <script src="./js/include/angular-route.min.js"></script>
 <script src="./js/include/lodash.min.js"></script>
 <link href="./css/style.css" rel="stylesheet" type="text/css" media="screen"></link>
+<style>
+body{ margin: auto; width: 800px; }
+</style>
 </head>
 <body>
 
+<div class="m20"></div>
+
 <div id="App" ng-app="App">
+    <div ng-view></div>
     <div ng-controller="MainController">
-        <div ng-view></div>
         <form name="indexForm" ng-controller="IndexFormController">
             <div ng-class="{true: 'show', false: 'hide'}[pageStage == '1']">
-                <table>
+                <table width="100%">
                     <tr>
-                        <td><span ng-bind="accountText"></span></td>
+                        <td colspan="2" align="center"><h1>Register</h1></td>
+                    </tr>
+                    <tr>
+                        <td align="center" width="30%"><span ng-bind="accountText"></span></td>
                         <td align="left">
-                            <input type="text" name="account" class="inp1"
+                            <input type="text" name="account" class="inp_default"
                                 ng-model="accountValue"
                                 ng-minlength="5"
                                 ng-maxlength="10"
@@ -32,13 +40,15 @@
                     <tr>
                         <td></td>
                         <td align="left">
-                            <div class="red" ng-class="{true: 'show', false: 'hide'}[errorCode == '11']">Account is not correct!</div>
+                            <div class="m10"></div>
+                            <div class="red" ng-class="{true: 'show', false: 'hide'}[errorCode.length != 0 && errorCode.indexOf('11') != -1]">*Account is not correct!</div>
+                            <div class="m10"></div>
                         </td>
                     </tr>
                     <tr>
-                        <td><span ng-bind="passwordText"></span></td>
+                        <td align="center"><span ng-bind="passwordText"></span></td>
                         <td align="left">
-                            <input type="password" name="password" class="inp1"
+                            <input type="password" name="password" class="inp_default"
                                 ng-model="passwordValue"
                                 ng-minlength="5"
                                 ng-maxlength="10"
@@ -50,11 +60,13 @@
                     <tr>
                         <td></td>
                         <td align="left">
-                            <div class="red" ng-class="{true: 'show', false: 'hide'}[errorCode == '21']">Password is not correct!</div>
+                            <div class="m10"></div>
+                            <div class="red" ng-class="{true: 'show', false: 'hide'}[errorCode.length != 0 && errorCode.indexOf('21') != -1]">*Password is not correct!</div>
+                            <div class="m10"></div>
                         </td>
                     </tr>
                     <tr>
-                        <td><span ng-bind="sexText"></span></td>
+                        <td align="center"><span ng-bind="sexText"></span></td>
                         <td align="left">
                              <select name="sex"
                                  ng-model="sex"
@@ -67,45 +79,52 @@
                     <tr>
                         <td></td>
                         <td align="left">
-                            <div class="red" ng-class="{true: 'show', false: 'hide'}[errorCode == '31']">Choose your sex!</div>
+                            <div class="m10"></div>
+                            <div class="red" ng-class="{true: 'show', false: 'hide'}[errorCode.length != 0 && errorCode.indexOf('31') != -1]">*Choose your sex!</div>
+                            <div class="m10"></div>
                         </td>
                     </tr>
                     <tr>
-                        <td><span ng-bind="favoriteText"></span></td>
+                        <td align="center"><span ng-bind="favoriteText"></span></td>
                         <td align="left">
-                            <div ng-repeat="favoriteObj in aryFavoriteObj" ng-class-odd="'red_bk'" ng-class-even="'gray_bk'">
+                            <div ng-repeat="favoriteObj in aryFavoriteObj" ng-class-odd="'default_bk'" ng-class-even="'gray_bk'">
+                                <div class="m10"></div>
                                 <input type="checkbox" name="favorite[]" value="{{favoriteObj.value}}"
                                     ng-click="fnClickFavorite($event, $index, favoriteObj.value)"
                                 />
                                 {{$index+1}}-{{favoriteObj.text}}
                             </div>
+                            <div class="m10"></div>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td align="left">
-                            <div class="red" ng-class="{true: 'show', false: 'hide'}[errorCode == '41']">Choose your favorite!</div>
+                            <div class="m10"></div>
+                            <div class="red" ng-class="{true: 'show', false: 'hide'}[errorCode.length != 0 && errorCode.indexOf('41') != -1]">*Choose your favorite!</div>
+                            <div class="m10"></div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" class="m10"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <button ng-click="fnShowOperate($event)">Show Operate</button>
-                        </td>
+                        <td></td>
+                        <td align="left"><button ng-click="fnShowOperate($event)">Check your info</button></td>
                     </tr>
                     <tr>
                         <td colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align="left">
+                            <div ng-class="{true: 'show', false: 'hide'}[operateStatus]">
+                                <!-- 內置tpl -->
+                                <div ng-include="'operateTpl'"></div>
+                            </div>
+                        </td>
                     </tr>
                 </table>
 
                 <div class="break"></div>
 
-                <div ng-class="{true: 'show', false: 'hide'}[operateStatus]">
-                    <!-- 內置tpl -->
-                    <div ng-include="'operateTpl'"></div>
-                </div>
             </div>
         </form>
     </div>
@@ -120,11 +139,7 @@
 <script src="./js/utility.app.js"></script>
 
 <script type="text/ng-template" id="operateTpl">
-<div ng-controller="OperateController">
-    <table>
-        <tr>
-            <td colspan="2"><button ng-click="fnSubmit($event)">Submit</button></td>
-        </tr>
-    </table>
-<div>
+    <div ng-controller="OperateController">
+        <button ng-click="fnSubmit($event)">Submit</button></td>
+    <div>
 </script>
