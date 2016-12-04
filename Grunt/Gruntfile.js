@@ -34,10 +34,17 @@ module.exports = function(grunt) {
                 files: ['src/html/**/*'],
                 tasks: ['copyHTML']
             },
-            sass: {
-                options: {},
+            //sass: {
+            //    options: {},
+            //    files: ['src/css/**/*'],
+            //    tasks: ['sass']
+            //},
+            less: {
                 files: ['src/css/**/*'],
-                tasks: ['sass']
+                tasks: ['less'],
+                options: {
+                    nospawn: true
+                }
             },
             script: {
                 options: {},
@@ -45,13 +52,24 @@ module.exports = function(grunt) {
                 tasks: ['jshint', 'copyJS']
             }
         },
-        sass: {
-            dist: {
+        //sass: {
+        //    dist: {
+        //        options: {
+        //            sourcemap: 'none'
+        //        },
+        //        files: {
+        //            'dist/css/style.css': 'src/css/style.scss'
+        //        }
+        //    }
+        //},
+        less: {
+            development: {
                 options: {
-                    sourcemap: 'none'
+                    //compress: true,
+                    path: ['src/css/import']
                 },
                 files: {
-                    'dist/css/style.css': 'src/css/style.scss'
+                    'dist/css/style.css': 'src/css/style.less'
                 }
             }
         },
@@ -86,7 +104,7 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('default', ['sass', 'uglify', 'jshint']);
+    grunt.registerTask('default', ['less', 'uglify', 'jshint']);
     grunt.registerTask('copyHTML', ['copy:html']);
     grunt.registerTask('copyJS', ['copy:js']);
     grunt.registerTask('server', ['connect', 'watch']);
