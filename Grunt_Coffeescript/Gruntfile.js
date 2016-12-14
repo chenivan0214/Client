@@ -44,7 +44,7 @@ module.exports = function(grunt) {
             script: {
                 options: {},
                 files: ['src/js/**/*'],
-                tasks: ['coffee']
+                tasks: ['coffee', 'jshint']
             }
         },
         coffee: {
@@ -53,6 +53,9 @@ module.exports = function(grunt) {
                    'dist/js/test.js': 'src/js/test.coffee'
                 }
             }
+        },
+        jshint: {
+            build: [ 'dist/js/**/*']
         },
         less: {
             development: {
