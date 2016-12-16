@@ -1,2 +1,2 @@
-number = 30
+number = 10
 console.log(number);

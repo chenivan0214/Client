@@ -29,10 +29,15 @@ module.exports = function(grunt) {
                 },
                 files: ['dist/*.html', 'dist/css/*', 'dist/js/**/*']
             },
+            script: {
+                options: {},
+                files: ['src/js/**/*'],
+                tasks: ['coffee', 'jshint']
+            },
             html: {
                 options: {},
-                files: ['src/html/**/*'],
-                tasks: ['copy:html']
+                files: ['src/jade/**/*'],
+                tasks: ['jade']
             },
             less: {
                 files: ['src/css/**/*'],
@@ -40,11 +45,6 @@ module.exports = function(grunt) {
                 options: {
                     nospawn: true
                 }
-            },
-            script: {
-                options: {},
-                files: ['src/js/**/*'],
-                tasks: ['coffee', 'jshint']
             }
         },
         coffee: {
@@ -55,12 +55,11 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            build: [ 'dist/js/**/*']
+            build: [ 'dist/js/**/*' ]
         },
         less: {
             development: {
                 options: {
-                    //compress: true,
                     path: ['src/css/import']
                 },
                 files: {
@@ -68,11 +67,14 @@ module.exports = function(grunt) {
                 }
             }
         },
-        copy: {
-            html: {
+        jade: {
+            compile: {
+                options: {
+                    pretty: true
+                },
                 files: [
-                    { expand: true, cwd: 'src/html/', src: '*', dest: 'dist', filter: 'isFile'},
-                ]
+                   {expand: true, cwd: 'src/jade/', src: '*.jade', dest: 'dist', ext: '.html'}
+               ]
             }
         }
     });
