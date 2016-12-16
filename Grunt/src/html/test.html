@@ -4,15 +4,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>React Sample</title>
 <script src="http://localhost:35729/livereload.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.5/angular-material.min.js"></script>
 <script src="./js/include/jquery.min.js"></script>
 <script src="./js/include/lodash.min.js"></script>
 </head>
 <body>
 
-<div id="example"></div>
+<div id="App" ng-app="App">
+    <div ng-controller="MainController">
+        <input type="tedxt" ng-model="number"/>
+        <input type="button" value="Test" ng-click="check()"/>
+    </div>
+</div>
 
 </body>
 </html>
 
 <script>
+var app = angular.module('App', []);
+
+app
+.controller('MainController', ['$scope', function($scope) {
+    $scope.number = 10;
+
+    $scope.check = function() {
+        console.log($scope.number);
+    }
+}])
 </script>
